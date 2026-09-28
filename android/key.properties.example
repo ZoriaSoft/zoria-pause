@@ -1,0 +1,10 @@
+# Örnek: android/key.properties bu dosyadan kopyalanır ve GERÇEK değerlerle
+# doldurulur — key.properties asla commit'lenmez (anayasa #5).
+# İmza havuzu kararı: ops/fleet/plans/README.md "İmza havuzu" (Faz 6).
+# storeFile, android/ dizinine göre göreli çözülür (rootProject.file) —
+# ../upload-keystore.jks = proje kökü. Dosya yoksa release debug imzasıyla
+# düşer (CI / flutter run --release kırılmaz).
+storePassword=<CHANGE_ME>
+keyPassword=<CHANGE_ME>
+keyAlias=upload
+storeFile=../upload-keystore.jks

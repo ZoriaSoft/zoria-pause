@@ -1,0 +1,336 @@
+{
+  "@@locale": "en",
+  "appTitle": "Zoria Pause",
+  "@appTitle": {
+    "description": "App display name shown in the system and app bar."
+  },
+  "statusHeading": "PRIVATE DNS",
+  "@statusHeading": {
+    "description": "Status band label above the current DNS mode/hostname."
+  },
+  "statusProtectionOn": "Protection on",
+  "@statusProtectionOn": {
+    "description": "Shown when private_dns_mode is hostname (enforcing)."
+  },
+  "statusAuto": "Auto",
+  "@statusAuto": {
+    "description": "Shown when private_dns_mode is opportunistic or unset (not enforcing)."
+  },
+  "statusPaused": "Paused",
+  "@statusPaused": {
+    "description": "Shown when private_dns_mode is off."
+  },
+  "controlHeading": "AD BLOCKING",
+  "@controlHeading": {
+    "description": "Control plate heading; pre-uppercased in ARB (TR i-to-İ trap)."
+  },
+  "controlOn": "ON",
+  "@controlOn": {
+    "description": "Control plate state; pre-uppercased in ARB."
+  },
+  "controlAuto": "AUTO",
+  "@controlAuto": {
+    "description": "Control plate state for opportunistic; pre-uppercased in ARB."
+  },
+  "controlPaused": "PAUSED",
+  "@controlPaused": {
+    "description": "Control plate state; pre-uppercased in ARB."
+  },
+  "controlTapPause": "tap: pause",
+  "@controlTapPause": {
+    "description": "Action hint under the plate state."
+  },
+  "controlTapResume": "tap: resume",
+  "@controlTapResume": {
+    "description": "Action hint under the plate state while paused."
+  },
+  "errorNotGranted": "Setup needed first: grant the one-time permission.",
+  "@errorNotGranted": {
+    "description": "WRITE_SECURE_SETTINGS grant missing; router gate normally catches this."
+  },
+  "errorUnsupported": "This device is not supported (Android 9+ required).",
+  "@errorUnsupported": {
+    "description": "Private DNS does not exist below API 28."
+  },
+  "errorGeneric": "Status could not be read.",
+  "@errorGeneric": {
+    "description": "Native bridge or platform error fallback."
+  },
+  "statusReading": "Reading status",
+  "@statusReading": {
+    "description": "Loading placeholder; not the slop word Loading."
+  },
+  "statusNoHostname": "none",
+  "@statusNoHostname": {
+    "description": "Plate hostname when specifier is empty; no em-dash."
+  },
+  "setupTitle": "Setup",
+  "@setupTitle": {
+    "description": "Setup screen title (permission guide)."
+  },
+  "setupTabSetup": "SETUP",
+  "@setupTabSetup": {
+    "description": "First setup tab label; pre-uppercased in ARB."
+  },
+  "setupTabGuide": "STEP BY STEP",
+  "@setupTabGuide": {
+    "description": "Visual guide tab label; pre-uppercased in ARB."
+  },
+  "setupIntro": "Pausing your ad-blocking Private DNS needs a one-time permission from Android. Grant it once and you are done; the app touches nothing else and sends nothing over the internet. The easiest path is done on the phone and needs a Wi-Fi connection.",
+  "@setupIntro": {
+    "description": "Intro paragraph; plain language, Wi-Fi requirement called out."
+  },
+  "setupPathShizukuTitle": "OPTION 1 · PHONE ONLY (RECOMMENDED)",
+  "@setupPathShizukuTitle": {
+    "description": "Primary setup path: Shizuku helper, no PC needed."
+  },
+  "setupLegacyAndroidNote": "The phone-only setup needs Android 11 or newer, so it is not available on this phone. Nothing is lost: connect the phone to a computer with USB once and run the command below — the permission is permanent either way.",
+  "@setupLegacyAndroidNote": {
+    "description": "Shown instead of the Shizuku card on API 28-29 (SDK gate); redirects to the PC/adb path."
+  },
+  "setupPathShizukuSteps": "1. Install Shizuku from Play Store with the button below (free, trusted helper).\n2. Open Shizuku and follow the 'start via wireless debugging' steps. Your phone must be on Wi-Fi.\n3. Come back to Zoria Pause and tap ALLOW below. The full walkthrough is in the step-by-step guide.",
+  "@setupPathShizukuSteps": {
+    "description": "Numbered steps for the phone-only path."
+  },
+  "setupGuideButton": "STEP BY STEP GUIDE",
+  "@setupGuideButton": {
+    "description": "Opens the full Shizuku walkthrough from the setup screen; pre-uppercased in ARB."
+  },
+  "shizukuNeedInstall": "Setting up with just the phone needs a small helper app: Shizuku. It is free on Play Store; you can even remove it once this is done.",
+  "@shizukuNeedInstall": {
+    "description": "Not-installed card copy; leads to the Play Store button."
+  },
+  "shizukuInstallButton": "INSTALL FROM PLAY STORE",
+  "@shizukuInstallButton": {
+    "description": "Opens Shizuku's Play Store page; pre-uppercased in ARB."
+  },
+  "shizukuStartHint": "Shizuku is installed but not started yet. Open it, start it via 'wireless debugging', then come back here. This page refreshes itself when you return.",
+  "@shizukuStartHint": {
+    "description": "Not-running card copy; leads to the open-Shizuku button."
+  },
+  "shizukuOpenButton": "OPEN SHIZUKU",
+  "@shizukuOpenButton": {
+    "description": "Launches the Shizuku app; pre-uppercased in ARB."
+  },
+  "shizukuReady": "Shizuku is ready. Permission can be granted with one tap.",
+  "@shizukuReady": {
+    "description": "Ready card status line."
+  },
+  "shizukuGrantButton": "ALLOW",
+  "@shizukuGrantButton": {
+    "description": "One-tap grant button; pre-uppercased in ARB (TR i-to-İ trap)."
+  },
+  "shizukuGrantFailed": "Could not grant. Make sure Shizuku is running and try again.",
+  "@shizukuGrantFailed": {
+    "description": "Snackbar when the Shizuku grant flow fails to start."
+  },
+  "setupPathPcTitle": "OPTION 2 · WITH A PC AND A HELPER",
+  "@setupPathPcTitle": {
+    "description": "Secondary path: someone runs the command from a computer."
+  },
+  "setupPathPcSteps": "Fastest route if someone can plug the phone into a computer with USB. That person runs the command below. USB debugging must be on, on the phone.",
+  "@setupPathPcSteps": {
+    "description": "Plain-language steps for the PC path."
+  },
+  "setupCommandHeader": "COMMAND TO RUN ON THE COMPUTER:",
+  "@setupCommandHeader": {
+    "description": "Header above the copyable adb grant command."
+  },
+  "setupCopy": "Copy command",
+  "@setupCopy": {
+    "description": "Copy-to-clipboard button label."
+  },
+  "setupCopied": "Copied",
+  "@setupCopied": {
+    "description": "Snackbar after copying."
+  },
+  "advancedWirelessTitle": "Advanced: wireless computer link (Android 11+)",
+  "@advancedWirelessTitle": {
+    "description": "Collapsed advanced section title."
+  },
+  "setupPathWirelessSteps": "No USB cable? Pair Wireless debugging from Developer options on the phone, then run the same command over the air from the computer.",
+  "@setupPathWirelessSteps": {
+    "description": "Wireless variant of the PC path, one paragraph."
+  },
+  "devOptionsTitle": "Developer options turned off?",
+  "@devOptionsTitle": {
+    "description": "Collapsed helper section title."
+  },
+  "devOptionsSteps": "1. Settings → About phone.\n2. Tap Build number 7 times.\n3. Once it says 'You are now a developer', go back; Developer options appears in Settings.",
+  "@devOptionsSteps": {
+    "description": "How to unlock developer options, numbered."
+  },
+  "setupCheckAgain": "Check again",
+  "@setupCheckAgain": {
+    "description": "Re-check grant button."
+  },
+  "guideIntro": "The full walkthrough for phone-only setup. Takes about 5 minutes and is done only once.",
+  "@guideIntro": {
+    "description": "Guide tab intro line."
+  },
+  "guideStep1Title": "Connect to a Wi-Fi network",
+  "guideStep1Body": "Wireless debugging works over Wi-Fi; keep the phone connected throughout the setup.",
+  "guideStep2Title": "Turn on Developer options",
+  "guideStep2Body": "Settings → About phone → tap Build number 7 times. Once it says 'You are now a developer' you are done.",
+  "guideStep3Title": "Turn on Wireless debugging",
+  "guideStep3Body": "Settings → Developer options → Wireless debugging on. Allow the network if asked.",
+  "guideStep4Title": "Install Shizuku",
+  "guideStep4Body": "Install it free from Play Store. You can remove it once everything is done.",
+  "guideStep5Title": "Start Shizuku",
+  "guideStep5Body": "Open Shizuku and choose 'Start via wireless debugging'. The phone takes you to the pairing screen in Settings; type the code shown there into Shizuku.",
+  "guideStep6Title": "See it running",
+  "guideStep6Body": "Wait until Shizuku's home screen shows it is running.",
+  "guideStep7Title": "Return to Zoria Pause and grant",
+  "guideStep7Body": "Tap ALLOW on the setup screen. That is it: the permission is permanent and these steps never repeat.",
+  "guideRebootNote": "Note: if the phone restarts, Shizuku stops and must be started again. The permission you gave Zoria Pause is permanent.",
+  "guideTroubleNote": "Stuck? Turn Wi-Fi off and on, then repeat the pairing step. If the pairing notification does not appear, open Wireless debugging in Settings and tap 'Pair device with pairing code' yourself.",
+  "@guideTroubleNote": {
+    "description": "Troubleshooting note at the end of the guide."
+  },
+  "durationLabel": "AUTO-RESUME",
+  "@durationLabel": {
+    "description": "Label above the duration selector while protection is on."
+  },
+  "durationRelabel": "REPLAN",
+  "@durationRelabel": {
+    "description": "Label above the duration selector while paused; pre-uppercased in ARB."
+  },
+  "durationForever": "No timer",
+  "@durationForever": {
+    "description": "Fourth duration chip: pause with no auto-resume."
+  },
+  "minutesShort": "min",
+  "@minutesShort": {
+    "description": "Short minutes unit on duration chips."
+  },
+  "resumeAtLabel": "Resumes at",
+  "@resumeAtLabel": {
+    "description": "Prefix for the scheduled auto-resume time."
+  },
+  "autoResumeNote": "System alarms may be off by about a minute.",
+  "@autoResumeNote": {
+    "description": "Honest inexact-alarm note (PLAN dürstlük notu)."
+  },
+  "unscheduledNote": "No auto-resume. Tap the button above to resume, or plan a duration below.",
+  "@unscheduledNote": {
+    "description": "Shown when paused with no plan (no-timer pause or manual system-settings off)."
+  },
+  "weeklyCount": "Paused {count} times this week",
+  "@weeklyCount": {
+    "description": "Mini weekly summary from the event log.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "honestDelayNote": "Takes effect within 1-2 minutes.",
+  "notifPermTitle": "NOTIFICATION PERMISSION",
+  "@notifPermTitle": {
+    "description": "Info card title; pre-uppercased in ARB."
+  },
+  "notifPermBody": "While paused we may send two small notifications: the resume time and an ends-soon heads-up. Without permission the app still works; you just will not see those times as notifications.",
+  "@notifPermBody": {
+    "description": "Non-scary rationale: what notifications do and what is lost without them."
+  },
+  "notifPermGrant": "ALLOW",
+  "@notifPermGrant": {
+    "description": "Accept button; pre-uppercased in ARB."
+  },
+  "notifPermLater": "NOT NOW",
+  "@notifPermLater": {
+    "description": "Decline button, still pauses; pre-uppercased in ARB."
+  },
+  "notifOffNote": "Notifications off: the resume time will not appear as a notification.",
+  "@notifOffNote": {
+    "description": "Honest note under the paused section when permission is missing."
+  },
+  "tileHintTitle": "FOR ONE-TAP CONTROL",
+  "@tileHintTitle": {
+    "description": "One-time tile onboarding card title; pre-uppercased in ARB."
+  },
+  "tileHintBody": "Swipe down with two fingers to open the quick settings panel. Tap EDIT, find Zoria Pause and drag it up. From then on you can pause without opening the app.",
+  "@tileHintBody": {
+    "description": "How to add the QS tile, one-time."
+  },
+  "tileHintDone": "DONE, ADDED IT",
+  "@tileHintDone": {
+    "description": "Dismiss button; pre-uppercased in ARB."
+  },
+  "reminderBandTitle": "ENDS SOON",
+  "@reminderBandTitle": {
+    "description": "In-panel ends-soon band; pre-uppercased in ARB."
+  },
+  "reminderBandExtend": "+5 MIN",
+  "@reminderBandExtend": {
+    "description": "Extend action on the reminder band and notification; pre-uppercased in ARB."
+  },
+  "providerCardTitle": "AD BLOCKING NOT SET UP",
+  "@providerCardTitle": {
+    "description": "One-time provider setup card title; pre-uppercased in ARB."
+  },
+  "providerCardBody": "Your phone has no blocking DNS yet, so there is nothing for the app to pause. Free, account-less AdGuard DNS can be set up with one tap.",
+  "@providerCardBody": {
+    "description": "Why the card exists + the one-tap offer."
+  },
+  "providerSetupButton": "SET UP ADGUARD",
+  "@providerSetupButton": {
+    "description": "One-tap provider setup button; pre-uppercased in ARB."
+  },
+  "providerManualLink": "Have your own DNS server? Enter it manually",
+  "@providerManualLink": {
+    "description": "Small link under the one-tap button."
+  },
+  "providerManualTitle": "DNS ADDRESS",
+  "@providerManualTitle": {
+    "description": "Manual hostname dialog title; pre-uppercased in ARB."
+  },
+  "providerManualHint": "e.g. dns.adguard.com",
+  "@providerManualHint": {
+    "description": "TextField hint."
+  },
+  "providerManualApply": "SET UP",
+  "@providerManualApply": {
+    "description": "Dialog apply button; pre-uppercased in ARB."
+  },
+  "providerManualCancel": "CANCEL",
+  "@providerManualCancel": {
+    "description": "Dialog cancel button; pre-uppercased in ARB."
+  },
+  "providerManualInvalid": "Enter a valid address, e.g. dns.adguard.com",
+  "@providerManualInvalid": {
+    "description": "Validation error line."
+  },
+  "infoTitle": "WHAT GETS BLOCKED?",
+  "@infoTitle": {
+    "description": "Collapsible info card title; pre-uppercased."
+  },
+  "infoBlocksLabel": "BLOCKS",
+  "@infoBlocksLabel": {
+    "description": "Sub-label; pre-uppercased."
+  },
+  "infoBlocks": "Banner and pop-up ads on the web, in-app ad banners and interstitials, tracker/analytics beacons — anything served from known ad servers.",
+  "@infoBlocks": {
+    "description": "What gets blocked, one honest sentence."
+  },
+  "infoLimitsLabel": "DOESN'T BLOCK",
+  "@infoLimitsLabel": {
+    "description": "Sub-label; pre-uppercased."
+  },
+  "infoLimits": "Ads served from the same source as the content itself: YouTube video ads, Instagram-style feed ads.",
+  "@infoLimits": {
+    "description": "Honest limits of DNS-level blocking."
+  },
+  "infoHowLabel": "HOW IT WORKS",
+  "@infoHowLabel": {
+    "description": "Sub-label; pre-uppercased."
+  },
+  "infoHow": "Known ad servers resolve to 'not found', so the ad can't load. Your connection stays encrypted; content traffic is untouched.",
+  "@infoHow": {
+    "description": "One-line mechanism explanation."
+  },
+  "homeSetupTooltip": "Setup guide",
+  "@homeSetupTooltip": {
+    "description": "App bar setup guide icon tooltip."
+  }
+}

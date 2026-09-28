@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 'Anahtar Panosu' launch zemini — gece is karası (DESIGN.md). -->
+<resources>
+    <color name="launch_bg">#1B1A17</color>
+    <color name="splash_plate">#F0EBDF</color>
+    <color name="splash_bar">#222420</color>
+    <color name="splash_copper">#C87A4E</color>
+</resources>

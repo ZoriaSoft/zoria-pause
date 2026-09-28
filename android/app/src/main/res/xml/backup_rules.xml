@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- allowBackup=false (manifest) zaten hiçbir şeyin buluta/gitmediğini
+     taahhüt eder; bu kurallar API <=30 auto-backup katmanı için aynı niçedi
+     açıkça belgeler: prefs'ler (önceki hostname + olay günlüğü) backup'a
+     girmez — "sunucu/bulut yok" duruşunun yedek tarafı da aynı (fleet review
+     2026-09-21). -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="." />
+</full-backup-content>

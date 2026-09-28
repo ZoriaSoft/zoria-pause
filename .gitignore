@@ -1,0 +1,33 @@
+# Flutter
+.dart_tool/
+.packages
+build/
+*.iml
+.idea/
+.flutter-plugins
+.flutter-plugins-dependencies
+android/.gradle/
+android/local.properties
+android/app/debug
+android/app/profile
+android/app/release
+
+# Secrets (anayasa #5 — asla commit'lenmez)
+android/key.properties
+*.jks
+*.keystore
+.env*
+
+# iOS (android-only proje; ileride platform eklenirse)
+ios/Pods/
+ios/.symlinks/
+
+# Codegen çıktıları — CI'da üretilir (pantry deseni).
+# l10n üretimi (app_localizations*.dart) commit'lenir; buraya girmez.
+*.g.dart
+lib/generated/
+drift_worker*
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Flutter/flutter_export_environment.sh
+ios/Runner/GeneratedPluginRegistrant.*

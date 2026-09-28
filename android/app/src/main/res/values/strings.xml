@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tile_label">Zoria Pause</string>
+    <string name="tile_subtitle_on">Ad blocking on</string>
+    <string name="tile_subtitle_auto">Ad blocking auto</string>
+    <string name="tile_subtitle_paused">Ad blocking paused</string>
+    <string name="tile_subtitle_setup">Setup required</string>
+    <string name="tile_subtitle_unsupported">Not supported on this device</string>
+    <string name="notif_channel_name">Pause status</string>
+    <string name="notif_paused_title">Zoria Pause</string>
+    <string name="notif_paused_text">Ad blocking paused. Returns around %1$s. Tap: resume now.</string>
+    <string name="notif_paused_forever_text">Ad blocking paused with no timer. Tap: resume now.</string>
+    <string name="notif_reminder_channel_name">Resume reminder</string>
+    <string name="notif_reminder_title">Resuming soon</string>
+    <string name="notif_reminder_text">Ad blocking returns around %1$s. Tap to extend.</string>
+    <string name="notif_extend">+5 min</string>
+</resources>

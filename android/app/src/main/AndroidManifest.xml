@@ -1,0 +1,106 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- WRITE_SECURE_SETTINGS runtime istenmez; adb-grant/Shizuku ile verilir (Faz 3 rehber). -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+    <!-- sentry-android-core AAR manifest'i INTERNET'i union-merge ile release'e
+         sokuyordu (fleet review F1, 2026-09-21). Ürün vaadi "ağ yok" olduğu için
+         izin buradan bilinçli çıkarılır. Debug/profile manifest'leri (yüksek
+         öncelikli merge katmanı) INTERNET'i yeniden tanımladığından flutter
+         tooling (hot reload, VM service) etkilenmez. Release doğrulaması work
+         PC'de `aapt2 dump permissions` ile yapılmalı. -->
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        tools:node="remove"/>
+    <!-- Otomatik geri açma: reboot sonrası alarm yeniden kurulur. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!-- Kalıcı sessiz bildirim (API 33+ runtime; pause anında istenir). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <application
+        android:label="Zoria Pause"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <!-- Tile'a uzun basınca app açılır (Quick Settings standardı). -->
+            <intent-filter>
+                <action android:name="android.service.qs.action.QS_TILE_PREFERENCES"/>
+            </intent-filter>
+        </activity>
+        <service
+            android:name=".PauseTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_tile_pause"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true"/>
+        </service>
+        <receiver
+            android:name=".AutoResumeReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.zoriasoft.zoriapause.ACTION_AUTO_RESUME"/>
+                <action android:name="com.zoriasoft.zoriapause.ACTION_RESUME_NOW"/>
+                <action android:name="com.zoriasoft.zoriapause.ACTION_REMINDER"/>
+                <action android:name="com.zoriasoft.zoriapause.ACTION_EXTEND"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <!-- Shizuku binder alıcısı (dev.rikka.shizuku:provider şartı). -->
+        <provider
+            android:name="rikka.shizuku.ShizukuProvider"
+            android:authorities="${applicationId}.shizuku"
+            android:multiprocess="false"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+    <!-- Android 11+ package visibility: Shizuku kurulum algısı getPackageInfo
+         ile yapılır — queries beyanı olmadan NameNotFoundException atılır ve
+         kurulu Shizuku "kurulu değil" görünür (gerçek cihazda kanıtlandı). -->
+    <queries>
+        <package android:name="moe.shizuku.privileged.api" />
+    </queries>
+    <!-- Required to query activities that can process text, see:
+         https://developer.android.com/training/package-visibility and
+         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+
+         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+    </queries>
+</manifest>

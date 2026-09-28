@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 'Anahtar Panosu' launch zemini — gündüz fildişi (DESIGN.md). -->
+<resources>
+    <color name="launch_bg">#F2EDE1</color>
+    <color name="splash_plate">#222420</color>
+    <color name="splash_bar">#F2EDE1</color>
+    <color name="splash_copper">#C87A4E</color>
+    <color name="ic_launcher_background">#222420</color>
+</resources>

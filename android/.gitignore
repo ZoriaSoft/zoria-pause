@@ -1,0 +1,13 @@
+# Gradle wrapper COMMIT'LENİR (CI android-unit-test fresh checkout'te
+# ./gradlew çağırıyor — şablonun wrapper yutması Faz 2-5 CI'ını kırdı).
+/.gradle
+/captures/
+/local.properties
+GeneratedPluginRegistrant.java
+.cxx/
+
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/to/reference-keystore
+key.properties
+**/*.keystore
+**/*.jks

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tile_label">Zoria Pause</string>
+    <string name="tile_subtitle_on">Reklam engelleme açık</string>
+    <string name="tile_subtitle_auto">Reklam engelleme otomatik</string>
+    <string name="tile_subtitle_paused">Reklam engelleme duraklatıldı</string>
+    <string name="tile_subtitle_setup">Kurulum gerekli</string>
+    <string name="tile_subtitle_unsupported">Bu cihazda desteklenmiyor</string>
+    <string name="notif_channel_name">Duraklatma durumu</string>
+    <string name="notif_paused_title">Zoria Pause</string>
+    <string name="notif_paused_text">Reklam engelleme duraklatıldı. %1$s civarında geri açılacak. Dokun: hemen geri aç.</string>
+    <string name="notif_paused_forever_text">Reklam engelleme süresiz duraklatıldı. Dokun: hemen geri aç.</string>
+    <string name="notif_reminder_channel_name">Geri açma hatırlatması</string>
+    <string name="notif_reminder_title">Geri açılma yakında</string>
+    <string name="notif_reminder_text">Reklam engelleme %1$s civarında geri açılacak. Uzatmak için dokun.</string>
+    <string name="notif_extend">+5 dk</string>
+</resources>
