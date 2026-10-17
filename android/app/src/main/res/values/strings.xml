@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="tile_label">Zoria Pause</string>
-    <string name="tile_subtitle_on">Ad blocking on</string>
+    <string name="tile_subtitle_on">Private DNS on</string>
     <string name="tile_subtitle_auto">Ad blocking auto</string>
     <string name="tile_subtitle_paused">Ad blocking paused</string>
     <string name="tile_subtitle_setup">Setup required</string>

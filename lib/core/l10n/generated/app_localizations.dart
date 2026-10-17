@@ -110,10 +110,10 @@ abstract class AppLocalizations {
   /// **'PRIVATE DNS'**
   String get statusHeading;
 
-  /// Shown when private_dns_mode is hostname (enforcing).
+  /// Shown when private_dns_mode is hostname (enforcing). Generic wording: any hostname may be set, not only ad-blocking ones.
   ///
   /// In en, this message translates to:
-  /// **'Protection on'**
+  /// **'Private DNS on'**
   String get statusProtectionOn;
 
   /// Shown when private_dns_mode is opportunistic or unset (not enforcing).
@@ -131,7 +131,7 @@ abstract class AppLocalizations {
   /// Control plate heading; pre-uppercased in ARB (TR i-to-İ trap).
   ///
   /// In en, this message translates to:
-  /// **'AD BLOCKING'**
+  /// **'PRIVATE DNS'**
   String get controlHeading;
 
   /// Control plate state; pre-uppercased in ARB.

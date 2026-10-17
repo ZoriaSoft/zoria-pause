@@ -8,9 +8,9 @@
   "@statusHeading": {
     "description": "Status band label above the current DNS mode/hostname."
   },
-  "statusProtectionOn": "Protection on",
+  "statusProtectionOn": "Private DNS on",
   "@statusProtectionOn": {
-    "description": "Shown when private_dns_mode is hostname (enforcing)."
+    "description": "Shown when private_dns_mode is hostname (enforcing). Generic wording: any hostname may be set, not only ad-blocking ones."
   },
   "statusAuto": "Auto",
   "@statusAuto": {
@@ -20,7 +20,7 @@
   "@statusPaused": {
     "description": "Shown when private_dns_mode is off."
   },
-  "controlHeading": "AD BLOCKING",
+  "controlHeading": "PRIVATE DNS",
   "@controlHeading": {
     "description": "Control plate heading; pre-uppercased in ARB (TR i-to-İ trap)."
   },

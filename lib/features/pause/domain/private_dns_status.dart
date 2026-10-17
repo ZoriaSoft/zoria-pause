@@ -64,8 +64,9 @@ class PrivateDnsStatus {
 
   bool get isPaused => mode == 'off';
 
-  /// KORUMA AÇIK = hostname modu (enforce). opportunistic "otomatik"tir;
-  /// Faz 5'e kadar tek-satırlık durum metni yalnız bu ikisini ayırt eder.
+  /// ÖZEL DNS AÇIK = hostname modu (enforce). opportunistic "otomatik"tir;
+  /// kullanıcı metni bilerek genel tutulur: her hostname reklam engellemez
+  /// (örn. dns.google), "reklam engelleme açık" iddiası kurulmaz.
   bool get isProtectionOn => mode == 'hostname';
 
   /// Engelleyici yok: hostname modu değil ve specifier boş.

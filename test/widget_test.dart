@@ -172,7 +172,7 @@ void main() {
       expect(find.text('dns.adguard.com'), findsOneWidget);
       expect(find.text('v$appVersion'), findsOneWidget);
       expect(kAppVersion.startsWith('$appVersion+'), isTrue);
-      expect(find.text('PRIVATE DNS'), findsNothing);
+      expect(find.text('PRIVATE DNS'), findsOneWidget);
 
       await tester.tap(find.byKey(const Key('home_toggle')));
       await tester.pumpAndSettle();

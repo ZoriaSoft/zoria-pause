@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statusHeading => 'PRIVATE DNS';
 
   @override
-  String get statusProtectionOn => 'Protection on';
+  String get statusProtectionOn => 'Private DNS on';
 
   @override
   String get statusAuto => 'Auto';
@@ -24,7 +24,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statusPaused => 'Paused';
 
   @override
-  String get controlHeading => 'AD BLOCKING';
+  String get controlHeading => 'PRIVATE DNS';
 
   @override
   String get controlOn => 'ON';

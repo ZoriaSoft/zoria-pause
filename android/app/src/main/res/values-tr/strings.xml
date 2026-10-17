@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="tile_label">Zoria Pause</string>
-    <string name="tile_subtitle_on">Reklam engelleme açık</string>
+    <string name="tile_subtitle_on">Özel DNS açık</string>
     <string name="tile_subtitle_auto">Reklam engelleme otomatik</string>
     <string name="tile_subtitle_paused">Reklam engelleme duraklatıldı</string>
     <string name="tile_subtitle_setup">Kurulum gerekli</string>
