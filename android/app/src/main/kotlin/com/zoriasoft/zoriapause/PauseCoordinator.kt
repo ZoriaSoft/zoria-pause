@@ -118,6 +118,9 @@ class PauseCoordinator(
         val state = manager.readState()
         if (!state.isPaused) return state
         scheduler.cancel()
+        // Gösterilmiş hatırlatma bildirimi de gider — alarm iptali ekrandaki
+        // bildirimi silmez, süresizde eski "dolmak üzere" asılı kalıyordu.
+        PauseNotification.cancelReminder(context)
         log.add("reschedule", source, state, null)
         PauseNotification.show(context, null)
         return manager.readState()

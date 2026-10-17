@@ -32,6 +32,7 @@ void main() {
   var shizukuGrantCalls = 0;
   var permissionCalls = 0;
   const resumeAtMs = 1780000000000;
+  int? resumeAtOverride;
 
   Map<Object?, Object?> statusMap() => {
         'granted': grant,
@@ -39,7 +40,7 @@ void main() {
         'sdkInt': sdkInt,
         'mode': paused ? 'off' : (auto ? 'opportunistic' : 'hostname'),
         'specifier': specifierValue,
-        'resumeAtEpochMs': paused && scheduled ? resumeAtMs : null,
+        'resumeAtEpochMs': paused && scheduled ? (resumeAtOverride ?? resumeAtMs) : null,
         'durationMinutes': selectedDuration,
         'canNotify': canNotify,
         'notificationPermissionAsked': notifAsked,
@@ -70,6 +71,7 @@ void main() {
     tileHintDismissed = true;
     selectedDuration = 5;
     capturedPauseArgs = null;
+    resumeAtOverride = null;
     capturedSetDurationArgs = null;
     capturedRescheduleArgs = null;
     capturedExtendArgs = null;
@@ -150,6 +152,16 @@ void main() {
     );
   }
 
+
+  /// Süre çipinin zemin rengi: seçili çip ters (dolu), diğerleri şeffaf.
+  Color? chipColor(WidgetTester tester, String label) {
+    final container = tester.widget<AnimatedContainer>(
+      find
+          .ancestor(of: find.text(label), matching: find.byType(AnimatedContainer))
+          .first,
+    );
+    return (container.decoration as BoxDecoration?)?.color;
+  }
   group('ana panel', () {
     testWidgets('koruma açık durumu gösterir ve kesici duraklatır', (tester) async {
       await tester.pumpWidget(const ProviderScope(child: ZoriaPauseApp()));
@@ -290,6 +302,22 @@ void main() {
       await tester.tap(find.text('+5 MIN'));
       await tester.pumpAndSettle();
       expect((capturedExtendArgs! as Map)['durationMinutes'], 5);
+    });
+
+    testWidgets('duraklatılmışken seçili çip kalıcı seçimi değil kurulu planı gösterir',
+        (tester) async {
+      paused = true;
+      scheduled = true;
+      selectedDuration = 5;
+      resumeAtOverride =
+          DateTime.now().add(const Duration(minutes: 30)).millisecondsSinceEpoch;
+      await tester.pumpWidget(const ProviderScope(child: ZoriaPauseApp()));
+      await tester.pumpAndSettle();
+
+      expect(find.text('REPLAN'), findsOneWidget);
+      // Plan 30 dk: 30 çipi seçili (dolu), kalıcı seçim 5 çipi seçili değil.
+      expect(chipColor(tester, '30 min'), isNot(Colors.transparent));
+      expect(chipColor(tester, '5 min'), Colors.transparent);
     });
 
     testWidgets('ilk pause bildirim kartı çıkarmaz', (tester) async {

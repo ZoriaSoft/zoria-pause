@@ -169,6 +169,23 @@ bool _looksLikeHostname(String value) {
   return regex.hasMatch(value);
 }
 
+/// Seçili süre çipi: duraklatılmamışken kalıcı seçim ([PrivateDnsStatus.durationMinutes],
+/// tile ile ortak); duraklatılmışken AKTİF PLAN — kalan süreyi kapsayan en
+/// küçük çip, plansızde süresiz (0). Kalıcı seçim yeniden planlamada
+/// güncellenmez; çip ondan türetilirse kurulu plan yanlış süreyle seçili görünür.
+int selectedDurationMinutes(PrivateDnsStatus status, DateTime now) {
+  if (!status.isPaused) return status.durationMinutes;
+  final resumeAt = status.resumeAtEpochMs;
+  if (resumeAt == null) return 0;
+  final remainingMs = resumeAt - now.millisecondsSinceEpoch;
+  if (remainingMs <= 0) return 5;
+  final remainingMinutes = (remainingMs / Duration.millisecondsPerMinute).ceil();
+  for (final chip in const [5, 15, 30]) {
+    if (remainingMinutes <= chip) return chip;
+  }
+  return 30;
+}
+
 class _Panel extends ConsumerWidget {
   const _Panel({required this.status});
 
@@ -178,6 +195,7 @@ class _Panel extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final controller = ref.watch(pauseControllerProvider.notifier);
+    final selectedDuration = selectedDurationMinutes(status, DateTime.now());
     final specifier = status.specifier;
     final hostname =
         specifier == null || specifier.isEmpty ? l10n.statusNoHostname : specifier;
@@ -222,7 +240,7 @@ class _Panel extends ConsumerWidget {
               ),
               _DurationSection(
                 paused: true,
-                selected: status.durationMinutes,
+                selected: selectedDuration,
                 onPick: controller.rescheduleResume,
               ),
             ] else if (status.isPaused)
@@ -230,14 +248,14 @@ class _Panel extends ConsumerWidget {
                 _UnscheduledNote(),
                 _DurationSection(
                   paused: true,
-                  selected: status.durationMinutes,
+                  selected: selectedDuration,
                   onPick: controller.rescheduleResume,
                 ),
               ]
             else
               _DurationSection(
                 paused: false,
-                selected: status.durationMinutes,
+                selected: selectedDuration,
                 onPick: controller.setDuration,
               ),
             const TrimLine(),
