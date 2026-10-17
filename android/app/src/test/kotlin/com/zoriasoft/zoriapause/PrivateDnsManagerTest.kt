@@ -14,9 +14,10 @@ private class FakeSettings(initial: Map<String, String?> = emptyMap()) : Setting
     val values = initial.toMutableMap()
 
     override fun getString(key: String): String? = values[key]
-    override fun putString(key: String, value: String?) {
+    override fun putString(key: String, value: String?): Boolean {
         writes.add(key to value)
         if (value == null) values.remove(key) else values[key] = value
+        return true
     }
 }
 

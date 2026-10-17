@@ -18,6 +18,8 @@ data class PrivateDnsState(
     val supported: Boolean,
     val mode: String?,
     val specifier: String?,
+    /** Son geri açma yazması doğrulanamadıysa true — kurtarma kaydı korunur. */
+    val writeFailed: Boolean = false,
 ) {
     val isPaused: Boolean get() = mode == MODE_OFF
     val isProtectionOn: Boolean get() = mode == MODE_HOSTNAME
@@ -39,18 +41,17 @@ data class PrivateDnsState(
 /** Settings.Global köprüsü — birim testte bellek-içi fake ile değiştirilir. */
 interface SettingsBackend {
     fun getString(key: String): String?
-    fun putString(key: String, value: String?)
+
+    /** @return yazma sistemce kabul edildiyse true (Settings.Global dönüşü). */
+    fun putString(key: String, value: String?): Boolean
 }
 
 /** Gerçek Settings.Global arka ucu. */
 class GlobalSettingsBackend(private val resolver: ContentResolver) : SettingsBackend {
     override fun getString(key: String): String? = Settings.Global.getString(resolver, key)
 
-    /** Yazmanın başarısı çağrıcıyı ilgilendirmez — akış yazma sonrası
-     *  readState() ile durumu yeniden okur, başarısız yazma orada görünür. */
-    override fun putString(key: String, value: String?) {
+    override fun putString(key: String, value: String?): Boolean =
         Settings.Global.putString(resolver, key, value)
-    }
 }
 
 /** Küçük kalıcı KV — pause önceki (mode, specifier) değerini tutar (Faz 4'te Drift). */
@@ -133,14 +134,40 @@ class PrivateDnsManager(
         // Mode'u ilk yazıp süreç specifier'dan önce ölürse hostname modu bayat
         // specifier'a commit olur (kırık DNS). Specifier'ın önce yazılması
         // mode değişimini atomik commit noktası yapar (fleet review 2026-09-21).
-        if (targetMode == MODE_HOSTNAME) {
-            settings.putString(KEY_PRIVATE_DNS_SPECIFIER, targetSpecifier)
+        // Doğrulama: putString dönüşü + geri okuma hedefle eşleşmeden
+        // kurtarma kaydı SİLİNMEZ; başarısızlık writeFailed ile döner —
+        // yoksa DNS kapalı kalırken kayıt kaybolur, geri açma imkânsızlaşır.
+        try {
+            if (targetMode == MODE_HOSTNAME &&
+                !settings.putString(KEY_PRIVATE_DNS_SPECIFIER, targetSpecifier)
+            ) {
+                return failedState(current)
+            }
+            if (!settings.putString(KEY_PRIVATE_DNS_MODE, targetMode)) {
+                return failedState(current)
+            }
+        } catch (e: Exception) {
+            return failedState(current)
         }
-        settings.putString(KEY_PRIVATE_DNS_MODE, targetMode)
+        val verified = try {
+            readState()
+        } catch (e: Exception) {
+            return failedState(current)
+        }
+        val verifiedOk = verified.mode == targetMode &&
+            (targetMode != MODE_HOSTNAME || verified.specifier == targetSpecifier)
+        if (!verifiedOk) return verified.copy(writeFailed = true)
         store.remove(PREF_PREVIOUS_MODE)
         store.remove(PREF_PREVIOUS_SPECIFIER)
-        return readState()
+        return verified
     }
+
+    private fun failedState(fallback: PrivateDnsState): PrivateDnsState =
+        try {
+            readState().copy(writeFailed = true)
+        } catch (e: Exception) {
+            fallback.copy(writeFailed = true)
+        }
 
     /**
      * Engelleyici DNS kur (AdGuard vb.): mode=hostname + specifier yazar ve

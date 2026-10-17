@@ -14,4 +14,6 @@
     <string name="notif_reminder_title">Resuming soon</string>
     <string name="notif_reminder_text">Ad blocking returns around %1$s. Tap to extend.</string>
     <string name="notif_extend">+5 min</string>
+    <string name="notif_resume_failed_title">Could not resume</string>
+    <string name="notif_resume_failed_text">Private DNS is still paused. Open Zoria Pause and tap to try again.</string>
 </resources>

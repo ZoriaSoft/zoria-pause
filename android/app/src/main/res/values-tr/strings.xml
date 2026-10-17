@@ -14,4 +14,6 @@
     <string name="notif_reminder_title">Geri açılma yakında</string>
     <string name="notif_reminder_text">Reklam engelleme %1$s civarında geri açılacak. Uzatmak için dokun.</string>
     <string name="notif_extend">+5 dk</string>
+    <string name="notif_resume_failed_title">Geri açılamadı</string>
+    <string name="notif_resume_failed_text">Özel DNS hâlâ duraklatılmış. Zoria Pause'ı açıp tekrar dene.</string>
 </resources>
