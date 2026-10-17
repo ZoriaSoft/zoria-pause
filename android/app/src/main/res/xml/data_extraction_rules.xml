@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- API 31+ data-extraction katmanı: allowBackup=false ile birlikte hiçbir
      veri cloud-backup veya device-transfer'a çıkmaz (fleet review
-     2026-09-21). -->
+     2026-09-21). Drift DB (zoria_pause.sqlite, hostname geçmişi) de dışarıda:
+     drift_flutter dosyayı getApplicationDocumentsDirectory altına yazar
+     (Android'de filesDir = "file" domain'i); "database" domain'i de aynı
+     adla dışlanır. -->
 <data-extraction-rules>
     <cloud-backup>
         <exclude domain="sharedpref" path="." />
+        <exclude domain="file" path="zoria_pause.sqlite" />
+        <exclude domain="database" path="zoria_pause.sqlite" />
     </cloud-backup>
     <device-transfer>
         <exclude domain="sharedpref" path="." />
+        <exclude domain="file" path="zoria_pause.sqlite" />
+        <exclude domain="database" path="zoria_pause.sqlite" />
     </device-transfer>
 </data-extraction-rules>

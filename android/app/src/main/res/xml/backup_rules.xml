@@ -6,4 +6,6 @@
      2026-09-21). -->
 <full-backup-content>
     <exclude domain="sharedpref" path="." />
+    <exclude domain="file" path="zoria_pause.sqlite" />
+    <exclude domain="database" path="zoria_pause.sqlite" />
 </full-backup-content>
