@@ -18,9 +18,10 @@ class EventLogEntries extends Table {
 
 @DriftDatabase(tables: [EventLogEntries])
 class AppDatabase extends _$AppDatabase {
-  // drift_flutter: getApplicationDocumentsDirectory/zoria_pause.sqlite
-  // (Android'de filesDir = backup "file" domain'i) — backup/transfer
-  // kurallarında exclude'lu, cihaz aktarımıyla taşınmaz.
+  // drift_flutter: getApplicationDocumentsDirectory()/zoria_pause.sqlite
+  // (Android'de PathUtils.getDataDirectory → app_flutter/zoria_pause.sqlite,
+  // backup "root" domain'i) — backup/transfer kurallarında (-wal/-shm/-journal
+  // dahil) exclude'lu, cihaz aktarımıyla taşınmaz.
   AppDatabase() : super(driftDatabase(name: 'zoria_pause'));
 
   @override
