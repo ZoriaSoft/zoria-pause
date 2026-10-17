@@ -68,14 +68,27 @@ class PauseCoordinator(
         return state
     }
 
-    /** App/bildirim/alarm kaynaklı geri açma. Hâlâ duraklatılmamışsa temizlik. */
+    /** App/bildirim/alarm kaynaklı geri açma. Hâlâ duraklatılmamışsa temizlik.
+     *  Yazma doğrulanamazsa alarm/bildirim ve 'resume' olayı korunur —
+     *  DNS hâlâ kapalıyken temizlik yapılırsa kurtarma yolu kaybolur;
+     *  kullanıcıya hata bildirimi gösterilir. */
     fun resume(source: String): PrivateDnsState {
         val wasPaused = manager.readState().isPaused
-        val state = if (wasPaused) manager.resume() else manager.readState()
+        if (!wasPaused) {
+            scheduler.cancel()
+            PauseNotification.cancel(context)
+            PauseNotification.cancelReminder(context)
+            return manager.readState()
+        }
+        val state = manager.resume()
+        if (!resumeSucceeded(state)) {
+            PauseNotification.showResumeFailed(context)
+            return state
+        }
         scheduler.cancel()
         PauseNotification.cancel(context)
         PauseNotification.cancelReminder(context)
-        if (wasPaused) log.add("resume", source, state)
+        log.add("resume", source, state)
         return state
     }
 
@@ -105,6 +118,9 @@ class PauseCoordinator(
         val state = manager.readState()
         if (!state.isPaused) return state
         scheduler.cancel()
+        // Gösterilmiş hatırlatma bildirimi de gider — alarm iptali ekrandaki
+        // bildirimi silmez, süresizde eski "dolmak üzere" asılı kalıyordu.
+        PauseNotification.cancelReminder(context)
         log.add("reschedule", source, state, null)
         PauseNotification.show(context, null)
         return manager.readState()
@@ -148,6 +164,10 @@ class PauseCoordinator(
     }
 
     companion object {
+        /** Geri açma başarısı: artık duraklatılmış değil ve yazma doğrulanmış. */
+        fun resumeSucceeded(state: PrivateDnsState): Boolean =
+            !state.isPaused && !state.writeFailed
+
         /** Yeniden planlama kararı: <= 0 süresiz → plan yok; değilse yeni an. */
         fun nextResumeAt(durationMinutes: Long, now: Long): Long? =
             if (durationMinutes <= 0) null else now + durationMinutes * 60_000

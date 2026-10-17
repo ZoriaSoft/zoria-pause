@@ -15,7 +15,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get statusHeading => 'PRIVATE DNS';
 
   @override
-  String get statusProtectionOn => 'Koruma açık';
+  String get statusProtectionOn => 'Özel DNS açık';
 
   @override
   String get statusAuto => 'Otomatik';
@@ -24,7 +24,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get statusPaused => 'Duraklatıldı';
 
   @override
-  String get controlHeading => 'REKLAM ENGELLEME';
+  String get controlHeading => 'ÖZEL DNS';
 
   @override
   String get controlOn => 'AÇIK';

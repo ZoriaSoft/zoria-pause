@@ -24,6 +24,7 @@ object PauseNotification {
     const val REMINDER_CHANNEL_ID = "zoria_pause_reminder"
     const val NOTIFICATION_ID = 1
     const val REMINDER_NOTIFICATION_ID = 2
+    const val ERROR_NOTIFICATION_ID = 3
     const val ACTION_RESUME_NOW = "com.zoriasoft.zoriapause.ACTION_RESUME_NOW"
     const val ACTION_EXTEND = "com.zoriasoft.zoriapause.ACTION_EXTEND"
     const val EXTEND_MINUTES = 5L
@@ -112,6 +113,22 @@ object PauseNotification {
 
     fun cancelReminder(context: Context) {
         context.getSystemService(NotificationManager::class.java).cancel(REMINDER_NOTIFICATION_ID)
+    }
+
+    /** Geri açma doğrulanamadı — DNS hâlâ duraklatılmış; dokunuş app'i açar. */
+    fun showResumeFailed(context: Context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
+        ensureReminderChannel(context)
+        if (!canShow(context)) return
+        val notification: Notification = Notification.Builder(context, REMINDER_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_tile_pause)
+            .setContentTitle(context.getString(R.string.notif_resume_failed_title))
+            .setContentText(context.getString(R.string.notif_resume_failed_text))
+            .setContentIntent(openAppPendingIntent(context))
+            .setAutoCancel(true)
+            .build()
+        context.getSystemService(NotificationManager::class.java)
+            .notify(ERROR_NOTIFICATION_ID, notification)
     }
 
     private fun extendAction(context: Context): Notification.Action =
